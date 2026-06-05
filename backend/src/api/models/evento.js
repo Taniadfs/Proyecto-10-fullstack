@@ -7,12 +7,12 @@ const eventoSchema= new mongoose.Schema({
 
   fecha: {
     type : Date,
-    required: true ('La fecha es obligatoria')
+    required: [true,'La fecha es obligatoria']
   },
 
   lugar: {
     type : String,
-    required: true ('El lugar es obligatorio'),
+    required: [true, 'El lugar es obligatorio'],
     trim : true
   },
 
@@ -30,7 +30,7 @@ const eventoSchema= new mongoose.Schema({
     asistentes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario',
+        ref: 'Usuario',
       }],
 })
 
