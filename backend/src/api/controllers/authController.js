@@ -27,11 +27,54 @@ const register = async(req, res) =>{
     }
     const hashedContraseña = await bcrypt.hash(contraseña, 10)
 
+    const nuevoUsuario = new Usuario({nombre, correo, contraseña: hashedContraseña})
+    await nuevoUsuario.save()
 
+    const token = jwt.sign ({id: nuevoUsuario._id}, process.env.JWT_SECRET, {expiresIn: '1h'})
 
-    const nuevoUsuario = new Usuario({nombre, correo, contraseña})
+    res.status(201).json({ message: 'Usuario registrado exitosamente',
+      token : token,
+      usuario: {
+        id: nuevoUsuario._id,
+        nombre: nuevoUsuario.nombre,
+        correo: nuevoUsuario.correo,
+      },
+     })
+
   }
   catch (error){
     res.status(500).json({message: 'Error en el servidor'})
   }
+
 }
+
+const login = async (req, res) => {
+  try {
+    const {correo, contraseña}= req.body
+    const usuario= await Usuario.findOne({correo}).select('+contraseña')
+    if (!usuario){
+      return res.status(401).json({ message: 'Datos inválidos' })
+    }
+
+    const isMatch = await bcrypt.compare( contraseña, usuario.contraseña)
+    if (!isMatch){
+      return res.status(401).json({ message: 'Datos inválidos' })
+    }
+
+    const token= jwt.sign({id: usuario._id}, process.env.JWT_SECRET, {expiresIn: '1h'})
+    res.status (200).json({ message: 'Inicio de sesión exitoso',
+      token: token, 
+      usuario: {
+        id:usuario._id,
+        nombre: usuario.nombre,
+        correo: usuario.correo,
+      }
+    })
+
+
+  } catch (error){
+    res.status(500).json({ message: 'Error en el servidor' })
+  }
+}
+
+module.exports = {register, login}
