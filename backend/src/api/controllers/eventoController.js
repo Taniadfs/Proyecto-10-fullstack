@@ -1,0 +1,1 @@
+const authenticate = require('../middlewares/authenticate')
