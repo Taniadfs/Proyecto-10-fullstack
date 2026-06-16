@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const authethicate= (req, res, next)=>{
+const authenticate= (req, res, next)=>{
   try {
     const authHeader=req.headers.authorization
     if(!authHeader){
@@ -26,4 +26,4 @@ const authethicate= (req, res, next)=>{
     
 }
 
-module.exports = authethicate
+module.exports = authenticate
