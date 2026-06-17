@@ -3,7 +3,7 @@ const express= require ('express')
 const connectDB = require ('./src/config/db')
 const cors = require('cors')
 const authRoutes = require('./src/api/routes/authRoutes')
-const eventoRoutes = require('./src/api/routes/eventoRoutes')
+const eventRoutes = require('./src/api/routes/eventoRoutes')
 
 
 const app=express()
@@ -17,7 +17,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
 app.use('/auth', authRoutes)
-app.use('/eventos', eventoRoutes)
+app.use('/eventos', eventRoutes)
 
 app.listen(PORT,()=>{
     console.log(`Servidor corriendo en el puerto ${PORT}`)
