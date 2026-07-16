@@ -2,7 +2,7 @@ const Evento=require('../models/evento')
 
 const getEventos=async (req,res)=>{
   try{
-    const eventos= await Evento.find()
+    const eventos= await Evento.find() .sort({fecha:1})
     res.status(200).json(eventos)
   }
   catch(error){
@@ -26,7 +26,8 @@ const getEventosById=async(req,res)=>{
 
 const createEvento=async(req,res)=>{
   try{ 
-    const {titulo, fecha, lugar, descripcion, imagen}= req.body
+    const {titulo, fecha, lugar, descripcion}= req.body
+    const imagen=req.file? req.file.path : null
     if (titulo === undefined || fecha === undefined || lugar === undefined) {
       return res.status(400).json({message:'Faltan datos obligatorios'})
     }

@@ -1,6 +1,7 @@
 const express = require ('express')
 const router=express.Router()
 const authenticate = require('../../middlewares/authenticate')
+const upload = require('../../middlewares/multer')
 
 const {
   getEventos,
@@ -14,7 +15,7 @@ const {
 
 router.get('/', getEventos)
 router.get('/:id', getEventosById)
-router.post('/',authenticate, createEvento)
+router.post('/',authenticate, upload, createEvento)
 router.put('/:id',authenticate, updateEvento)
 router.put( '/:idEvento/:idUsuario', authenticate, addAsistente)
 router.delete('/:id',authenticate, deleteEvento)
