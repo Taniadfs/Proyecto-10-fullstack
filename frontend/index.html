@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion de eventos</title>
+  <script type="module" src="js/index.js" defer></script>
+</head>
+<body>
+  <h1>Bienvenido</h1>
+  <div>
+      <form id="formLogin">
+     <div>
+    <label for="correo"> correo electronico </label>
+    <input type ="email" id ="loginCorreo" placeholder="correo electronico" required>
+   </div> 
+   <div>
+     <label for="contraseña"> contraseña</label>
+    <input type="password" id="loginContraseña" placeholder="contraseña" required>
+   </div>
+    <div>
+     <button type= "submit" id="acceder">Entrar</button>
+     </div>
+     <p>¿No tienes cuenta? <a href="#" id="registrarse"> Registrarse</a></p>
+    </form>
+
+    <form id="formRegistrer" style="display: none;">
+    <div>
+      <label for="nombre">nombre</label>
+      <input type="text" id="registrerNombre" placeholder="nombre" required>
+    </div>
+    <div>
+      <label for="correo">correo</label>
+      <input type="email" id="registrerCorreo" placeholder="correo electronico" required>
+    </div>
+    <div>
+      <label for="contraseña">contraseña</label>
+      <input type="password" id="registrerContraseña" placeholder="contraseña" required>
+    </div>
+    <div>
+      <button type="submit" id="Registrarse">Registrarse</button>
+    </div>
+    <p>¿Ya tienes cuenta? <a href="#" id="irALogin">Iniciar sesión</a></p>
+    </form>
+   </div>
+  
+</body>
+</html>
